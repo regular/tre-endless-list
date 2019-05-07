@@ -46,8 +46,9 @@ module.exports = function list(sourceDown, sourceUp, render) {
           return cb(null)
         }
         if (err) return cb(err)
-        const li = render(data)
-        ul.appendChild(li)
+        let lis = render(data)
+        if (!Array.isArray(lis)) lis = [lis]
+        lis.forEach( li=>ul.appendChild(li))
         fillBelow(cb)
       })
     }
